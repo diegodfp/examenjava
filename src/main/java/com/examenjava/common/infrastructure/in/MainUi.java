@@ -11,6 +11,8 @@ import com.examenjava.city.domain.service.CityService;
 import com.examenjava.gender.domain.service.GenderService;
 import com.examenjava.persons.domain.service.PersonsService;
 import com.examenjava.persons.infrastructure.in.RegisterPersonUi;
+import com.examenjava.persons_skills.domain.service.Persons_skillsService;
+import com.examenjava.persons_skills.infrastructure.in.RegisterPersonSkillUi;
 import com.examenjava.skill.domain.service.SkillService;
 import com.examenjava.skill.infrastructure.in.RegistrarSkillUi;
 
@@ -20,16 +22,19 @@ public class MainUi {
     private final CityService cityService;
     private final GenderService genderService; 
     private final SkillService skillService;
+    private final Persons_skillsService persons_skillsService;
 
-    
+
+
 
 
     public MainUi(PersonsService personsService, CityService cityService, GenderService genderService,
-            SkillService skillService) {
+            SkillService skillService, Persons_skillsService persons_skillsService) {
         this.personsService = personsService;
         this.cityService = cityService;
         this.genderService = genderService;
         this.skillService = skillService;
+        this.persons_skillsService = persons_skillsService;
     }
 
     public void showMainUi() {
@@ -54,11 +59,11 @@ public class MainUi {
         panel.add(registerPersonButton);
             
         JButton asignarSkillButton = new JButton("Asignar Skill a una Persona");
-        asignarSkillButton.setBounds(50, 30, 200, 25);
+        asignarSkillButton.setBounds(50, 60, 200, 25);
         panel.add(asignarSkillButton);
 
         JButton registrarSkillButton = new JButton("Crear una nueva  habilidad");
-        registrarSkillButton.setBounds(50, 60, 200, 25);
+        registrarSkillButton.setBounds(50, 90, 200, 25);
         panel.add(registrarSkillButton);
 
         JButton consultarButton = new JButton("Consultar Personas por habilidad");
@@ -87,6 +92,14 @@ public class MainUi {
             public void actionPerformed(ActionEvent e) { 
                 RegistrarSkillUi registrarSkillUi = new RegistrarSkillUi(skillService);
                 registrarSkillUi.showSkillRegisterUi();
+            }
+        });
+
+        asignarSkillButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { 
+                RegisterPersonSkillUi registerPersonSkillUi = new RegisterPersonSkillUi(personsService, persons_skillsService, skillService);
+                registerPersonSkillUi.showPersonSkillsUi();
             }
         });
     }

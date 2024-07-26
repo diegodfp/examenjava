@@ -4,9 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.examenjava.persons.domain.entity.Persons;
 import com.examenjava.persons.domain.service.PersonsService;
 import com.examenjava.common.config.DatabaseConfig;
+import com.examenjava.gender.domain.entity.Gender;
 public class PersonsRepository implements PersonsService {
      @Override
     public void createPersons(Persons persons) {
@@ -95,5 +99,28 @@ public class PersonsRepository implements PersonsService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Persons> getAllPersons() {
+  String sql = "SELECT id, name, lastname FROM gender";
+        List<Persons> persons = new ArrayList<>();
+        try (Connection connection = DatabaseConfig.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                Persons person = new Persons();
+                person.setId(resultSet.getInt("id"));
+                person.setName(resultSet.getString("name"));
+                person.setName(resultSet.getString("lastname"));
+                persons.add(person);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return persons;
     }
 }

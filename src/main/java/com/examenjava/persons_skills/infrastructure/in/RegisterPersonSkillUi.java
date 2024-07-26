@@ -58,7 +58,7 @@ public class RegisterPersonSkillUi {
         JComboBox<String> skillComboBox = new JComboBox<>();
 
         JButton registerButton = new JButton("Registrar");
-
+        JButton backButton = new JButton("Regresar");
         List<Persons> persons = personsService.getAllPersons();
         for (Persons person : persons) {
             personComboBox.addItem(person.getName() );
@@ -81,7 +81,7 @@ public class RegisterPersonSkillUi {
         panel.add(skillComboBox);
 
         panel.add(registerButton);
-
+        panel.add(backButton);
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -102,6 +102,14 @@ public class RegisterPersonSkillUi {
                 frame.dispose();
             }
         });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+            }
+        });
+
         frame.setVisible(true);
 
     }

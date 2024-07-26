@@ -27,11 +27,11 @@ public class DeletePersonUi {
         JTextField idField = new JTextField();
 
         JButton deleteButton = new JButton("Eliminar");
-
+        JButton backButton = new JButton("Eliminar");
         panel.add(idLabel);
         panel.add(idField);
         panel.add(deleteButton);
-
+        panel.add(backButton);
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -43,6 +43,13 @@ public class DeletePersonUi {
                         JOptionPane.showMessageDialog(frame, "Registro eliminado correctamente");
                         frame.dispose();
                     }
+            }
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
             }
         });
 

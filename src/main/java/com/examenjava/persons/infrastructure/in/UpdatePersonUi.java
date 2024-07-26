@@ -142,6 +142,14 @@ public class UpdatePersonUi {
                 frame.dispose();
             }
         });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+            }
+        });
+        
         frame.setVisible(true);
     }
 }

@@ -42,7 +42,7 @@ public class MainUi {
     public void showMainUi() {
         JFrame frame = new JFrame("Control de usuarios por skills");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 600);
+        frame.setSize(300, 300);
         frame.setLocationRelativeTo(null);
         // Crear un panel para colocar los componentes
         JPanel panel = new JPanel();

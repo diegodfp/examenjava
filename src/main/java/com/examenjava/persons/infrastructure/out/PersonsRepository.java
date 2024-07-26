@@ -122,4 +122,31 @@ public class PersonsRepository implements PersonsService {
 
         return persons;
     }
+
+    @Override
+    public List<Persons> getPersonSkills(int idSkill) {
+        List<Persons> persons = new ArrayList<>();
+        String sql = "SELECT id, name FROM persons p " +
+                     "JOIN persons_skill ps ON pp.idperson = p.id " +
+                     "WHERE pp.idskill = ?";
+        
+        try (Connection connection = DatabaseConfig.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            
+            statement.setInt(1, idSkill);  
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Persons person = new Persons();
+                    person.setId(resultSet.getInt("id"));
+                    person.setName(resultSet.getString("name"));
+                    persons.add(person);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return persons;
+    }
+
+    
 }

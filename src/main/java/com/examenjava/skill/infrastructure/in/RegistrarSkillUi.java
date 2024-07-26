@@ -28,12 +28,13 @@ public class RegistrarSkillUi {
         JTextField nombreField = new JTextField();
 
         JButton registerButton = new JButton("Registrar");
+        JButton backButton = new JButton("Regresar");
 
         panel.add(nombrLabel);
         panel.add(nombreField);
 
         panel.add(registerButton);
-
+        panel.add(backButton);
         // Acción del botón registrar
         registerButton.addActionListener(new ActionListener() {
             @Override
@@ -53,6 +54,13 @@ public class RegistrarSkillUi {
                 skillService.createSkill(skill);
 
                 JOptionPane.showMessageDialog(frame, "Skill registrado exitosamente");
+                frame.dispose();
+            }
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 frame.dispose();
             }
         });

@@ -11,4 +11,5 @@ public interface PersonsService {
     void updatePersons(Persons personsUpdate, int id);
     void deletePersons(int id);
     List<Persons> getAllPersons();
+    List<Persons> getPersonSkills(int idskill);
 }

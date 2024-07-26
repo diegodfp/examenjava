@@ -27,7 +27,7 @@ public class DeletePersonUi {
         JTextField idField = new JTextField();
 
         JButton deleteButton = new JButton("Eliminar");
-        JButton backButton = new JButton("Eliminar");
+        JButton backButton = new JButton("Regresar");
         panel.add(idLabel);
         panel.add(idField);
         panel.add(deleteButton);

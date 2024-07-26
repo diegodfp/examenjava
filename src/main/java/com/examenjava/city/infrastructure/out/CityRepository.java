@@ -15,7 +15,7 @@ public class CityRepository implements CityService {
 
     @Override
     public List<City> getAllCities() {
-  String sql = "SELECT id, name FROM city ";
+  String sql = "SELECT id, name FROM city";
         List<City> cities = new ArrayList<>();
         try (Connection connection = DatabaseConfig.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);

@@ -55,4 +55,20 @@ public class SkillRepository implements SkillService {
         return skills;
     }
 
+    @Override
+    public boolean isSkillsExists(String name) {
+        String sql = "SELECT COUNT(*) FROM skill WHERE name = ?";
+        try (Connection connection = DatabaseConfig.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, name);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1) > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

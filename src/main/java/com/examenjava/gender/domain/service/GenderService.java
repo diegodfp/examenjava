@@ -1,5 +1,9 @@
 package com.examenjava.gender.domain.service;
 
-public interface GenderService {
+import java.util.List;
 
+import com.examenjava.gender.domain.entity.Gender;
+
+public interface GenderService {
+    List<Gender> getAllGenders();
 }

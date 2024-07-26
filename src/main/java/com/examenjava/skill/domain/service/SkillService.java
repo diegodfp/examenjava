@@ -8,4 +8,5 @@ import com.examenjava.skill.domain.entity.Skill;
 public interface SkillService {
     void createSkill(Skill skill);
     List<Skill> getAllSkills();
+    boolean isSkillsExists(String name);
 }

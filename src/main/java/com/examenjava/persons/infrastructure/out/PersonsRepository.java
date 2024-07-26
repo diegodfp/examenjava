@@ -69,7 +69,7 @@ public class PersonsRepository implements PersonsService {
     }
 
     @Override
-    public void updatePersons(Persons persons) {
+    public void updatePersons(Persons persons, int id) {
         String sql = "UPDATE persons SET  name = ?, lastname = ?, idcity = ?, addres = ?, age = ? ,  email = ?, idgender = ? WHERE id = ?";
         System.out.println(persons.getId());
         try (Connection connection = DatabaseConfig.getConnection();
@@ -81,7 +81,7 @@ public class PersonsRepository implements PersonsService {
             statement.setInt(5, persons.getAge());
             statement.setString(6, persons.getEmail());
             statement.setInt(7, persons.getIdgender());
-            statement.setInt(8, persons.getId());  
+            statement.setInt(8, id);  
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -103,7 +103,7 @@ public class PersonsRepository implements PersonsService {
 
     @Override
     public List<Persons> getAllPersons() {
-  String sql = "SELECT id, name, lastname FROM gender";
+  String sql = "SELECT id, name FROM persons";
         List<Persons> persons = new ArrayList<>();
         try (Connection connection = DatabaseConfig.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
@@ -112,8 +112,7 @@ public class PersonsRepository implements PersonsService {
             while (resultSet.next()) {
                 Persons person = new Persons();
                 person.setId(resultSet.getInt("id"));
-                person.setName(resultSet.getString("name"));
-                person.setName(resultSet.getString("lastname"));
+                person.setName(resultSet.getString("name"));;
                 persons.add(person);
             }
 

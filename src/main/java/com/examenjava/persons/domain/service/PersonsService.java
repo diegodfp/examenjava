@@ -8,7 +8,7 @@ import com.examenjava.persons.domain.entity.Persons;
 public interface PersonsService {
     void createPersons(Persons persons);
     Persons findPersonsById(int id);
-    void updatePersons(Persons personsUpdate);
+    void updatePersons(Persons personsUpdate, int id);
     void deletePersons(int id);
     List<Persons> getAllPersons();
 }

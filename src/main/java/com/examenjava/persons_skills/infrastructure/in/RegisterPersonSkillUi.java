@@ -7,17 +7,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
+
 import java.util.List;
 import java.sql.Date;
-import com.examenjava.city.domain.entity.City;
-import com.examenjava.gender.domain.entity.Gender;
+
 import com.examenjava.persons.domain.entity.Persons;
 import com.examenjava.persons.domain.service.PersonsService;
 import com.examenjava.persons_skills.domain.entity.Persons_skills;
 import com.examenjava.persons_skills.domain.service.Persons_skillsService;
 import com.examenjava.skill.domain.entity.Skill;
 import com.examenjava.skill.domain.service.SkillService;
+import com.toedter.calendar.JDateChooser;
 
 public class RegisterPersonSkillUi {
     private final PersonsService personsService;
@@ -47,7 +47,9 @@ public class RegisterPersonSkillUi {
         frame.add(panel);
 
         JLabel fechaLabel = new JLabel("Fecha de Registro(formato AAAA-MM-DD):");
-        JTextField fechaField = new JTextField();
+        JDateChooser fabricationDateChooser = new JDateChooser();;
+        fabricationDateChooser.setDateFormatString("yyyy-MM-dd");
+
 
         JLabel personLabel = new JLabel("Nombre de la persona:");
         JComboBox<String> personComboBox = new JComboBox<>();
@@ -59,7 +61,7 @@ public class RegisterPersonSkillUi {
 
         List<Persons> persons = personsService.getAllPersons();
         for (Persons person : persons) {
-            personComboBox.addItem(person.getName() + " " + person.getLastname());
+            personComboBox.addItem(person.getName() );
             personMap.put(person.getName(), person.getId());
         }
 
@@ -70,7 +72,7 @@ public class RegisterPersonSkillUi {
         }
 
         panel.add(fechaLabel);
-        panel.add(fechaField);
+        panel.add(fabricationDateChooser);
 
         panel.add(personLabel);
         panel.add(personComboBox);
@@ -83,8 +85,8 @@ public class RegisterPersonSkillUi {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                Date registration_date = Date.valueOf(fechaField.getText()); 
+                java.util.Date registroDate = fabricationDateChooser.getDate();
+                java.sql.Date registration_date = new java.sql.Date(registroDate.getTime());
                 int idperson = personMap.get((String) personComboBox.getSelectedItem());
                 int idskill = skillMap.get((String) skillComboBox.getSelectedItem());
 

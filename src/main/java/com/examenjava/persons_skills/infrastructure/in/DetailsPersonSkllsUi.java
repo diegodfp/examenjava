@@ -47,6 +47,8 @@ public class DetailsPersonSkllsUi {
             skillComboBox.addItem(skill.getName());
             skillMap.put(skill.getName(), skill.getId());
         }
+
         
+
     }
 }

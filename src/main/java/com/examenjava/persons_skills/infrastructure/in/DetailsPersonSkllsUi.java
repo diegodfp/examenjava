@@ -17,8 +17,8 @@ public class DetailsPersonSkllsUi {
     private final PersonsService personsService;
     private final SkillService skillService;
 
-    private Map<String, Integer> skillMap;
-    private Map<String, Integer> persoMap;
+    private Map<Integer, Skill> skillMap;
+    private Map< Integer, Persons> persoMap;
 
     public DetailsPersonSkllsUi(PersonsService personsService, SkillService skillService) {
         this.personsService = personsService;
@@ -42,13 +42,30 @@ public class DetailsPersonSkllsUi {
         JComboBox<String> personComboBox = new JComboBox<>();
 
 
-        List<Skill> skills = skillService.getAllSkills();
-        for (Skill skill : skills) {
-            skillComboBox.addItem(skill.getName());
-            skillMap.put(skill.getName(), skill.getId());
-        }
 
-        
+        panel.add(skillLabel);
+        panel.add(skillComboBox);
+
+        panel.add(personLabel);
+        panel.add(personComboBox);
+
+        skillComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedSkill = (String) skillComboBox.getSelectedItem();
+                Skill selectedPlane = skillMap.get(selectedSkill);
+
+                if (selectedPlane != null) {
+                    // originalPlates = selectedPlane.getPlates();
+                    // platesField.setText(selectedPlane.getPlates());
+                    // capacityField.setText(String.valueOf(selectedPlane.getCapacity()));
+                    // fabricationDateChooser.setDate(selectedPlane.getFabricationDate());
+                    // statusComboBox.setSelectedItem(getKeyByValue(statusMap, selectedPlane.getIdStatus()));
+                    // modelComboBox.setSelectedItem(getKeyByValue(modelMap, selectedPlane.getIdModel()));
+                    // airlineComboBox.setSelectedItem(getKeyByValue(airlineMap, selectedPlane.getIdAerolinea()));
+                }
+            }
+        });
 
     }
 }
